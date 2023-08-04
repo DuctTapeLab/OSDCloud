@@ -10,8 +10,8 @@ $input = Read-Host "Please make a selection"
 
 Write-Host  -ForegroundColor Yellow "Loading OSDCloud..."
 
-#Install-Module OSD -Force 
-#Import-Module OSD -Force
+Install-Module OSD -Force -SkipPublisherCheck
+Import-Module OSD -Force
 
 switch ($input)
 {
