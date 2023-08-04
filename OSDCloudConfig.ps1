@@ -15,7 +15,7 @@ Import-Module OSD -Force
 
 switch ($input)
 {
-    '1' { Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -Firmware -SkipAutopilot } 
+    '1' { Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdition Enterprise -Firmware -SkipAutopilot } 
     '2' { Exit		}
 }
 
