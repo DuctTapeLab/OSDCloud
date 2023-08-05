@@ -1,37 +1,22 @@
-Write-Host -ForegroundColor Green “Starting OSDCloud ZTI”
+Write-Host  -ForegroundColor Yellow "Starting Custom OSDCloud Deployment ..."
+cls
+Write-Host "===================== Main Menu =======================" -ForegroundColor Yellow
+Write-Host "================ OSD Cloud Deployment =================" -ForegroundColor Yellow
+Write-Host "=======================v.1.0.0 ========================" -ForegroundColor Yellow
+Write-Host "=======================================================" -ForegroundColor Yellow
+Write-Host "1: Windows 11 Enterprise 22H2"-ForegroundColor Yellow
+Write-Host "2: Exit`n"-ForegroundColor Yellow
+$input = Read-Host "Please make a selection"
 
-Start-Sleep -Seconds 5
+Write-Host  -ForegroundColor Yellow "Loading OSDCloud..."
 
-#Change Display Resolution for Virtual Machine
+#Import-Module OSD -Force
+#Install-Module OSD -Force
 
-if ((Get-MyComputerModel) -match ‘Virtual’) {
-
-Write-Host -ForegroundColor Green “Setting Display Resolution to 1600x”
-
-Set-DisRes 1600
-
+switch ($input)
+{
+    '1' { Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdtion Enterprise} 
+    '2' { Exit		}
 }
-
-#Make sure I have the latest OSD Content
-
-Write-Host -ForegroundColor Green “Updating OSD PowerShell Module”
-
-Install-Module OSD -Force -SkipPublisherCheck
-
-Write-Host -ForegroundColor Green “Importing OSD PowerShell Module”
-
-Import-Module OSD -Force
-
-#Start OSDCloud ZTI the RIGHT way
-
-Write-Host -ForegroundColor Green “Start OSDCloud”
-
-Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdition Enterprise -ZTI
-
-#Restart from WinPE
-
-Write-Host -ForegroundColor Green “Restarting in 20 seconds!”
-
-Start-Sleep -Seconds 20
 
 wpeutil reboot
