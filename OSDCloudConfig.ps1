@@ -15,7 +15,7 @@ Write-Host  -ForegroundColor Yellow "Loading OSDCloud..."
 
 switch ($input)
 {
-    '1' { Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdtion Enterprise} 
+    '1' { Start-OSDCloud -OSLanguage en-us -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdition Enterprise} 
     '2' { Exit		}
 }
 
