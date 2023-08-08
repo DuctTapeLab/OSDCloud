@@ -22,7 +22,7 @@ switch ($input)
 Write-Host -ForegroundColor Cyan 'Updating Windows'
     if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
         try {
-            Install-Module PSWindowsUpdate -Force
+            Install-Module PSWindowsUpdate -Force -SkipPublisherCheck
             Import-Module PSWindowsUpdate -Force
         }
         catch {
