@@ -19,6 +19,25 @@ switch ($input)
     '2' { Exit		}
 }
 
+Write-Host -ForegroundColor Cyan 'Updating Windows'
+    if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
+        try {
+            Install-Module PSWindowsUpdate -Force
+            Import-Module PSWindowsUpdate -Force
+        }
+        catch {
+            Write-Warning 'Unable to install PSWindowsUpdate Windows Updates'
+        }
+    }
+    if (Get-Module PSWindowsUpdate -ListAvailable -ErrorAction Ignore) {
+        #Write-Host -ForegroundColor DarkCyan 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
+        Add-WUServiceManager -MicrosoftUpdate -Confirm:$false | Out-Null
+        #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
+        #Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
+        #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
+        Start-Process PowerShell.exe -ArgumentList "-Command Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -NotTitle 'Preview' -NotKBArticleID 'KB890830','KB5005463','KB4481252'" -Wait
+    }
+
 Write-Host "Cleaning up OSDCloud..." -ForegroundColor yellow 
 
 Copy-Item -Path C:\OSDCloud\Logs -Destination C:\Windows\Logs\OSDCloud -Recurse -ErrorAction SilentlyContinue
